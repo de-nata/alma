@@ -55,9 +55,31 @@ In all three cases:
 
 ## Example
 
-### 1. Setup
+### 1. Config:
 
-#### Emails:
+For example, to archive any emails from the last 14 days with red and green flags, based on their mailboxes and email addresses, and place them in the corresponding folders specified in the folder mapping section of the configuration file, the `config.txt` file should look like:
+
+```
+# Preferences:
+LOOKUP_WINDOW : 14
+FLAG_TO_ARCHIVE : green
+FLAG_IMPORTANT : red
+FLAG_AS_ARCHIVED : grey
+
+# Settings:
+ARCHIVE_BASE_PATH : /Archive/base/path
+FOLDER_NAME_INBOX : Inbox
+FOLDER_NAME_SENT : Sent
+
+# Folder mapping:
+@wonderland.com : 01_Wonderland
+@royal-mail : 02_Royal_Mail
+@follow.me : 03_Follow
+```
+
+### 2. Emails:
+
+Let's say we have these three emails:
 
 - Email 1: No flag
 
@@ -83,35 +105,9 @@ In all three cases:
   - Sent: 26 Nov 2024
   - Attachments: royal-mail-logo.png
 
-#### Config:
+### 3. Result: local archive
 
-Archive any emails from the last 14 days with red and green flags based on their mailboxes and email addresses, placing them in the corresponding folders specified in the folder mapping section of the configuration file.
-
-For example:
-
-```
-# Preferences:
-LOOKUP_WINDOW : 14
-FLAG_TO_ARCHIVE : green
-FLAG_IMPORTANT : red
-FLAG_AS_ARCHIVED : grey
-
-# Settings:
-ARCHIVE_BASE_PATH : /Archive/base/path
-FOLDER_NAME_INBOX : Inbox
-FOLDER_NAME_SENT : Sent
-
-# Folder mapping:
-@wonderland.com : 01_Wonderland
-@royal-mail : 02_Royal_Mail
-@follow.me : 03_Follow
-```
-
-### 2. Result
-
-#### Folder Structure:
-
-When any of the archiving scenarios are met, the flagged emails will be processed and stored.
+When one of the archiving scenarios is met, flagged emails will be processed and stored using a folder structure according to the configuration file:
 
 ```
 /Archive/base/path/
@@ -129,7 +125,9 @@ When any of the archiving scenarios are met, the flagged emails will be processe
         └── 2024-11-26_Fwd_ Next To-Dos.eml  <- Email 3, don't archive logos
 ```
 
-#### Emails:
+### 4. Result: emails
+
+After archiving, the state of the emails will be as follows:
 
 - Email 1: No flag -- untouched
 
