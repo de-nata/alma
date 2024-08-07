@@ -120,7 +120,7 @@ When any of the archiving scenarios are met, the flagged emails will be processe
 │   ├── Inbox/
 │   │   ├── 2024-12-27_Notes from last meeting.eml  <- Email 2
 │   │   └── 2024-12-27_Notes from last meeting/
-│   │       └── tea_meeting_notes.docx              <- Email 2 attachments
+│   │       └── tea_party_notes.docx                <- Email 2 attachments
 │   └── Sent/...
 │
 └── 02_Royal_Mail/
