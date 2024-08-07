@@ -1,0 +1,15 @@
+# Preferences:
+LOOKUP_WINDOW : 14
+FLAG_TO_ARCHIVE : green
+FLAG_IMPORTANT : red
+FLAG_AS_ARCHIVED : grey
+
+# Settings:
+ARCHIVE_BASE_PATH : /Archive/base/path
+FOLDER_NAME_INBOX : Inbox
+FOLDER_NAME_SENT : Sent
+
+# Folder mapping:
+@wonderland.com : 01_Wonderland
+@royal-mail.com : 02_Royal_Mail
+@follow.me : 03_Follow
