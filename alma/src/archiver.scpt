@@ -197,7 +197,13 @@ on save_attachments(emailAttachments, emlFilePath) --> boolean
             repeat with eachFile in emailAttachments
                 set fileName to sanitize_filename(name of eachFile)
                 set filePath to POSIX path of (attachmentsFolder  & ":" & fileName)
-                save eachFile in POSIX file filePath
+                try
+                    save eachFile in POSIX file filePath
+                on error errMsg number errNum
+                    set errDetails to errDetails & "fileName: " & fileName & linefeed
+                    set errDetails to errDetails & "filePath: " & filePath & linefeed
+                    display dialog "[ERROR] Failed to save attachment:" & linefeed & errDetails & errMsg number errNum
+                end try
             end repeat
         end tell
 
