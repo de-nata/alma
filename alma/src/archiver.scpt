@@ -194,17 +194,20 @@ on save_attachments(emailAttachments, emlFilePath) --> boolean
     try
         tell scriptFiles
             create_folder(attachmentsFolder) # /{archiveFolder}/{emlFileName}
-            repeat with eachFile in emailAttachments
-                set fileName to sanitize_filename(name of eachFile)
-                set filePath to POSIX path of (attachmentsFolder  & ":" & fileName)
-                try
-                    save eachFile in POSIX file filePath
-                on error errMsg number errNum
-                    set errDetails to errDetails & "fileName: " & fileName & linefeed
-                    set errDetails to errDetails & "filePath: " & filePath & linefeed
-                    display dialog "[ERROR] Failed to save attachment:" & linefeed & errDetails & errMsg number errNum
-                end try
-            end repeat
+			repeat with eachFile in emailAttachments
+				set fileName to sanitize_filename(name of eachFile)
+				set filePath to POSIX path of (attachmentsFolder & ":" & fileName)
+				
+				try # BUG: this seems to be failing with some attachments, we log and let it continue for now
+					save eachFile in POSIX file filePath
+				on error errMsg number errNum
+					set errDetails to errDetails & "fileName: " & fileName & linefeed
+					set errDetails to errDetails & "filePath: " & filePath & linefeed
+					set errMsg to "[ERROR] Failed to save attachment:" & linefeed & errDetails & errMsg
+					display dialog errMsg & linefeed & "(Error Number: " & errNum & ")"
+				end try
+				
+			end repeat
         end tell
 
         set wereSaved to true
