@@ -1,5 +1,5 @@
 property name : "alma"
-property version : "0.5.1"
+property version : "0.5.2"
 
 (*
 Automated Local Mail Archive
