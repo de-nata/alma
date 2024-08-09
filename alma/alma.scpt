@@ -89,7 +89,7 @@ on run_script(theEmails, loadedConfig) --> nothing
         set archivedEmails to {}
         if (count of matchedEmails) > 0 then
             repeat with eachEmail in matchedEmails
-                # emlFileName = {YYYY-MM-DD}_{SUBJECT}.eml
+                # emlFileName = {YYYYMMDD_hhmm}_{SUBJECT}.eml
                 set emlFileName to my get_eml_file_name(eachEmail)
 
                 tell scriptArchiver
@@ -123,7 +123,7 @@ on run_script(theEmails, loadedConfig) --> nothing
 end run_script
 
 
--- Build a .eml filename with the received date as prefix: {YYYY-MM-DD}_{SUBJECT}.eml
+-- Build a .eml filename with the received date as prefix: {YYYYMMDD_hhmm}_{SUBJECT}.eml
 on get_eml_file_name(theEmail) --> string
     set scriptMail to my load_script(SCRIPT_MAIL)
     set scriptFiles to my load_script(SCRIPT_FILES)
@@ -133,7 +133,7 @@ on get_eml_file_name(theEmail) --> string
         set emailSubject to get_subject(theEmail)
     end tell
     tell scriptFiles
-        set datePrefix to format_iso_date(emailDate)
+        set datePrefix to format_iso_datetime(emailDate)
         set fileName to sanitize_filename(emailSubject)
     end tell
 

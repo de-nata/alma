@@ -56,9 +56,14 @@ on sanitize_filename(fileName) --> text
 end sanitize_filename
 
 
--- Convert a date to an ISO 8601 string "YYYY-MM-DD" to use as prefix in a filename
-on format_iso_date(theDate) --> text
-    set isoDate to (theDate as «class isot» as string)
-    return text 1 thru 10 of isoDate
-end format_iso_date
+-- Convert a date to an ISO 8601 basic format string "YYYYMMDD_hhmm" to use as prefix in a filename
+on format_iso_datetime(theDate) --> text
+    set isoDateTime to text 1 thru 16 of (theDate as «class isot» as string) # "YYYY-MM-DDThh:mm"
+    set {ASTID, AppleScript's text item delimiters} to {AppleScript's text item delimiters, "T"}
+    set {datePart, timePart} to text items of isoDateTime
+    set AppleScript's text item delimiters to {"-", ":"}
+    set {datePart, timePart} to {text items of datePart, text items of timePart}
+    set AppleScript's text item delimiters to ASTID
+	return (datePart & "_" & timePart) as text # "YYYYMMDD_hhmm"
+end format_iso_datetime
 
