@@ -30,6 +30,7 @@ property FLAG_AS_ARCHIVED : "FLAG_AS_ARCHIVED"
 property ARCHIVE_BASE_PATH : "ARCHIVE_BASE_PATH"
 property FOLDER_NAME_INBOX : "FOLDER_NAME_INBOX"
 property FOLDER_NAME_SENT : "FOLDER_NAME_SENT"
+property DATETIME_FORMAT : "DATETIME_FORMAT"
 
 # CONFIG:
 property DOMAIN_UNKNOWN_PREFIX : "xx_" # domains not found in the CONFIG's mapping will get this prefix
@@ -37,7 +38,7 @@ property DOMAIN_UNKNOWN_PREFIX : "xx_" # domains not found in the CONFIG's mappi
 property PREFS : ¬
 	{LOOKUP_WINDOW:"", FLAG_TO_ARCHIVE:"", FLAG_IMPORTANT:"", FLAG_AS_ARCHIVED:""}
 property SETTINGS : ¬
-	{ARCHIVE_BASE_PATH:"", INBOX_FOLDER:"", SENT_FOLDER:""}
+	{ARCHIVE_BASE_PATH:"", INBOX_FOLDER:"", SENT_FOLDER:"", DATETIME_FORMAT:""}
 property MAPPING : ¬
 	{DOMAIN_TO_FOLDER:{}, DOMAIN_UNKNOWN_PREFIX:DOMAIN_UNKNOWN_PREFIX}
 
@@ -119,6 +120,7 @@ on _load_config_record(configSections) --> record
 	set CONFIG's SETTINGS's ARCHIVE_BASE_PATH to my _get_value(configSettings, ARCHIVE_BASE_PATH)
 	set CONFIG's SETTINGS's INBOX_FOLDER to my _get_value(configSettings, FOLDER_NAME_INBOX)
 	set CONFIG's SETTINGS's SENT_FOLDER to my _get_value(configSettings, FOLDER_NAME_SENT)
+	set CONFIG's SETTINGS's DATETIME_FORMAT to my _get_value(configSettings, DATETIME_FORMAT)
 
 	# Load the domain-to-folder mapping:
 	set CONFIG's MAPPING's DOMAIN_TO_FOLDER to configMapping

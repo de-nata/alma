@@ -56,14 +56,12 @@ on sanitize_filename(fileName) --> text
 end sanitize_filename
 
 
--- Convert a date to an ISO 8601 basic format string "YYYYMMDD_hhmm" to use as prefix in a filename
-on format_iso_datetime(theDate) --> text
-    set isoDateTime to text 1 thru 16 of (theDate as «class isot» as string) # "YYYY-MM-DDThh:mm"
-    set {ASTID, AppleScript's text item delimiters} to {AppleScript's text item delimiters, "T"}
-    set {datePart, timePart} to text items of isoDateTime
-    set AppleScript's text item delimiters to {"-", ":"}
-    set {datePart, timePart} to {text items of datePart, text items of timePart}
-    set AppleScript's text item delimiters to ASTID
-	return (datePart & "_" & timePart) as text # "YYYYMMDD_hhmm"
+-- Format a date according to a given strftime string
+on format_iso_datetime(theDate, formatString) --> text
+	set isoDateTimeString to quoted form of (theDate as «class isot» as string)
+    set dateCommand to "date -j -f '%Y-%m-%dT%H:%M:%S' " & isoDateTimeString & " +" & formatString
+    set trCommand to " | tr '/:' '_'" # replace llegal characters
+	set formattedDate to do shell script dateCommand & trCommand
+	return formattedDate
 end format_iso_datetime
 
