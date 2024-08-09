@@ -201,7 +201,7 @@ on save_attachments(emailAttachments, emlFilePath) --> boolean
 				try # BUG: this seems to be failing with some attachments, we log and let it continue for now
 					save eachFile in POSIX file filePath
 				on error errMsg number errNum
-					set errDetails to errDetails & "fileName: " & fileName & linefeed
+					set errDetails to "fileName: " & fileName & linefeed
 					set errDetails to errDetails & "filePath: " & filePath & linefeed
 					set errMsg to "[ERROR] Failed to save attachment:" & linefeed & errDetails & errMsg
 					display dialog errMsg & linefeed & "(Error Number: " & errNum & ")"
